@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts, fetchPostsSuccess, fetchPostsFailure } from '../actions/posts'
 
@@ -26,4 +27,15 @@ const mapDispatchToProps = (dispatch) => {
 
 const PostsListContainer = connect(mapStateToProps, mapDispatchToProps)(PostsList)
 
-export default PostsListContainer
+class Posts extends Component {
+
+    render() {
+        return (
+            <div>
+            <PostsListContainer />
+            </div>
+        )
+    }
+}
+
+export default Posts

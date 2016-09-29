@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
-import PostsIndex from './pages/PostsIndex'
+import Posts from './containers/PostsList'
 
 export default (
   <Route path="/">
-    <IndexRoute component={PostsIndex} />
+    <IndexRoute component={Posts} />
   </Route>
 )
