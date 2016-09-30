@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts, fetchPostsSuccess, fetchPostsFailure } from '../actions/posts'
 
+import Header from './Header'
 import PostsList from '../components/PostsList'
 
 
@@ -32,6 +33,7 @@ class Posts extends Component {
     render() {
         return (
             <div>
+            <Header type="posts_index"/>
             <PostsListContainer />
             </div>
         )
