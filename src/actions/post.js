@@ -2,10 +2,12 @@ import {
     FETCH_POST,
     FETCH_POST_SUCCESS,
     FETCH_POST_FAILURE,
+    RESET_POST,
 
     CREATE_POST,
     CREATE_POST_SUCCESS,
     CREATE_POST_FAILURE,
+    RESET_NEW_POST,
 
     DELETE_POST,
     DELETE_POST_SUCCESS,
@@ -34,7 +36,7 @@ export function fetchPost(id) {
 
     const request = axios({
         method: HTTP_GET,
-        url: API_GET_POST,
+        url: API_GET_POST + id,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -59,6 +61,12 @@ export function fetchPostFailure(error) {
         type: FETCH_POST_FAILURE,
         payload: error
     }
+}
+
+export function resetActivePost() {
+  return {
+    type: RESET_POST
+  }
 }
 
 /*
@@ -98,6 +106,12 @@ export function createPostFailure(error) {
     }
 }
 
+export function resetNewPost() {
+  return {
+    type: RESET_NEW_POST
+  }
+}
+
 /*
  ********************
  * Delete actions
@@ -107,7 +121,7 @@ export function deletePost(id) {
 
     const request = axios({
         method: HTTP_DELETE,
-        url: API_DELETE_POST,
+        url: API_DELETE_POST + id,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -138,4 +152,4 @@ export function resetDeletedPost() {
   return {
     type: RESET_DELETED_POST
   }
-};
+}
