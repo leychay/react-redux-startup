@@ -1,14 +1,14 @@
 import {
-    FETCH_POST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE
-    CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_FAILURE
+    FETCH_POST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE, RESET_POST,
+    CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_FAILURE, RESET_NEW_POST,
     DELETE_POST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE, RESET_DELETED_POST
 } from '../constants/post'
 
 
 const INITIAL_STATE = {
-    activePost: {post: [], error: null, loading: false},
-    newPost: {post: [], error: null, loading: false},
-    deletedPost: {post: [], error: null, loading: false},
+    activePost: {post: null, error: null, loading: false},
+    newPost: {post: null, error: null, loading: false},
+    deletedPost: {post: null, error: null, loading: false}
 }
 
 export default function (state = INITIAL_STATE, action) {
@@ -26,22 +26,29 @@ export default function (state = INITIAL_STATE, action) {
             return {
                 ...state,
                 activePost: {
-                    //@todo: this can be done with less effort when using lodash
-                    post: Object.keys(action.payload).map(key => action.payload[key]),
+                    post: action.payload,
                     error: null,
                     loading: false
                 }
             }
         case FETCH_POST_FAILURE:
-            err = action.payload || {message: action.payload}
+            err = action.payload || {message: action.payload.message}
             return {
                 ...state,
                 activePost: {
-                    post: null,
-                    error: err,
-                    loading: false
+                    ...state.activePost,
+                    error: err
                 }
             }
+            case RESET_POST:
+                return {
+                    activePost:{
+                        post:null,
+                        error:null,
+                        loading: false
+                    }
+                }
+
 
         case CREATE_POST:
             return {
@@ -68,6 +75,15 @@ export default function (state = INITIAL_STATE, action) {
                 newPost: {
                     post: null,
                     error: err,
+                    loading: false
+                }
+            }
+        case RESET_NEW_POST:
+            return {
+                ...state,
+                newPost:{
+                    post:null,
+                    error:null,
                     loading: false
                 }
             }
@@ -104,7 +120,9 @@ export default function (state = INITIAL_STATE, action) {
             return {
                 ...state,
                 deletedPost:{
-                    post:null, error:null, loading: false
+                    post:null,
+                    error:null,
+                    loading: false
                 }
             }
 
