@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-
 class Header extends Component {
   static contextTypes = {
     router: PropTypes.object
@@ -10,7 +9,7 @@ class Header extends Component {
   componentWillUnmount() {
     //Important! If your component is navigating based on some global state(from say componentWillReceiveProps)
     //always reset that global state back to null when you REMOUNT
-     this.props.resetMe();
+     this.props.resetMe()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,7 +24,7 @@ class Header extends Component {
         const { type } = this.props;
         if(type === 'posts_index') {
        return (
-        <Link style={{color:'#337ab7',  fontSize: '18px'}} to="/posts/new">New Post</Link>
+        <Link style={{color:'#337ab7',  fontSize: '18px'}} to="/new">New Post</Link>
         );
     } else if(type === 'posts_new') {
        return (
@@ -33,9 +32,9 @@ class Header extends Component {
          );
     } else if(type === 'posts_show') {
         return (
-            <div className="navbar-form navbar-right" style={{paddingRight: '50px'}}>
+            <span className="navbar-form navbar-right">
                 <button className="btn btn-warning pull-xs-right"  onClick={()=> {this.props.onDeleteClick()}}>Delete Post</button>
-            </div>
+            </span>
         );
     }
     };
