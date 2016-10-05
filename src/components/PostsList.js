@@ -10,7 +10,9 @@ class PostsList extends Component {
         return posts.map((post) => {
             return (
                 <li key={post.id}>
+                <Link style={{color:'black'}} to={"show/" + post.id}>
                 <h3>{post.title}</h3>
+                </Link>
                 <div>{post.content}</div>
                 </li>
                 )
