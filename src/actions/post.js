@@ -39,7 +39,7 @@ export function fetchPost(id) {
         url: API_GET_POST + id,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     })
 
@@ -76,13 +76,16 @@ export function resetActivePost() {
 */
 export function createPost(props) {
 
+    //this shouldn't be this way tho. Axios should have handled it, but seems like it's not doing it tho. hence, this.
+    //@todo: figure out why axios is not sending the data properly
+    let data = 'title=' + props.title + '&content=' + props.content;
+
     const request = axios({
         method: HTTP_POST,
-        data: props,
+        data: data,
         url: API_CREATE_POST,
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     })
 
@@ -123,8 +126,7 @@ export function deletePost(id) {
         method: HTTP_DELETE,
         url: API_DELETE_POST + id,
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     })
 
