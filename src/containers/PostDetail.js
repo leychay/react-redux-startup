@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (globalState, ownProps) => {
-  console.log('michael', globalState.post.activePost)
     return {
         activePost: globalState.post.activePost,
         postId: ownProps.id
